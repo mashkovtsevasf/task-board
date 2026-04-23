@@ -5,11 +5,22 @@
   <meta name="author" content="Mashkovtseva Sofiia">
   <title>TaskBoard — головна</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    main.panel a:link,
+    main.panel a:visited {
+      color: #1d4ed8 !important;
+      text-decoration: underline !important;
+      font-weight: 600 !important;
+    }
+    main.panel a:hover {
+      color: #1e3a8a !important;
+    }
+  </style>
 </head>
-<body id="top" class="page-home" bgcolor="#f4f6fb" link="#0f766e" vlink="#115e59" alink="#14b8a6">
+<body id="top" class="page-home">
   <div class="wrap">
     <header>
-      <h1>TaskBoard</h1>
+      <h1 id="main-title">TaskBoard</h1>
       <nav class="nav">
         <a href="index.html">Головна</a>
         <a href="tasks.html">Завдання</a>
@@ -18,7 +29,7 @@
       </nav>
     </header>
     <main class="panel">
-      <p class="lead"><strong>TaskBoard</strong> — твоя невелика дошка для навчання: завдання, проєкти й дати в одному місці.</p>
+      <p class="lead" style="font-size: 1.08rem !important; line-height: 1.7 !important; color: #334155 !important;"><strong>TaskBoard</strong> — твоя невелика дошка для навчання: завдання, проєкти й дати в одному місці.</p>
       <p>Розділи допомагають <strong>не змішувати</strong> лабораторні, <em>курсові</em> й особисті справи.</p>
       <p><a href="#about">Як цим користуватися</a></p>
       <p>Примітка на сторінці завдань: <a href="tasks.html#tasks-note">що варто зробити сьогодні</a>.</p>

@@ -6,6 +6,7 @@
   --accent-dark: #0f766e;
   --nav-bg: #ecfdf5;
   --border: #cbd5e1;
+  --body-bg: #f1f5f9;
 }
 
 * {
@@ -19,6 +20,60 @@ body {
   font-size: 1rem;
   line-height: 1.55;
   color: var(--text);
+  font-style: normal;
+  text-align: left;
+  background-color: var(--body-bg);
+}
+
+body.page-home {
+  background-color: #f4f6fb !important;
+}
+
+body.page-home {
+  background-color: pink;
+}
+
+body.page-tasks {
+  background-color: #f0fdf4 !important;
+}
+
+body.page-projects {
+  background-color: #eef3f8 !important;
+  background-image: url("images/clock.jpeg");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 200px auto;
+}
+
+body.page-calendar {
+  background-color: #fffbeb !important;
+}
+
+h1#main-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.65rem;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  text-align: left;
+}
+
+main.panel a:link,
+main.panel a:visited {
+  font-size: 0.95rem;
+  font-style: normal;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+main.panel a:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 table.simple-chart {
@@ -39,14 +94,6 @@ table.matrix {
 
 header {
   margin-bottom: 1.25rem;
-}
-
-h1 {
-  margin: 0 0 0.75rem;
-  font-size: 1.65rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #0f172a;
 }
 
 .nav {
@@ -102,26 +149,60 @@ table {
   width: 100%;
   margin: 1rem 0;
   font-size: 0.95rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f8fafc;
 }
 
 table caption {
   caption-side: top;
   text-align: left;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0 0 0.5rem;
+  padding: 0.25rem 0;
   color: #0f172a;
 }
 
 th,
 td {
   border: 1px solid var(--border);
-  padding: 0.5rem 0.65rem;
+  padding: 0.55rem 0.7rem;
   vertical-align: middle;
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 th {
   background: #ccfbf1;
   color: #134e4a;
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) td {
+  background-color: #f1f5f9;
+}
+
+table.simple-chart td,
+table.simple-chart th {
+  background-color: #ffffff;
+}
+
+table.simple-chart tbody tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+table.matrix {
+  background-color: #fffef5;
+  border-color: #eab308;
+}
+
+table.matrix th,
+table.matrix td {
+  border-color: #fde047;
 }
 
 .img-inline {
@@ -153,18 +234,49 @@ iframe {
   background: var(--panel);
 }
 
-ul,
-ol,
+ul {
+  margin: 0.65rem 0 0.85rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+ol {
+  margin: 0.65rem 0 0.85rem;
+  padding: 0.55rem 0.55rem 0.55rem 1.85rem;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  background-color: #f0f9ff;
+  color: #0c4a6e;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
 dl {
-  margin: 0.5rem 0 0.75rem;
+  margin: 0.65rem 0 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #c4b5fd;
+  border-radius: 8px;
+  background-color: #faf5ff;
+  color: #1e293b;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 dt {
   font-weight: 700;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
+  color: #5b21b6;
+  font-size: 0.98rem;
 }
 
 dd {
-  margin-left: 1rem;
+  margin: 0.25rem 0 0.5rem 1rem;
+  padding-left: 0.35rem;
   color: var(--muted);
+  border-left: 3px solid #ddd6fe;
 }

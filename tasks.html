@@ -4,11 +4,22 @@
   <meta charset="UTF-8">
   <title>TaskBoard — завдання</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    main.panel a:link,
+    main.panel a:visited {
+      color: #1d4ed8 !important;
+      text-decoration: underline !important;
+      font-weight: 600 !important;
+    }
+    main.panel a:hover {
+      color: #1e3a8a !important;
+    }
+  </style>
 </head>
-<body class="page-tasks" bgcolor="#f0fdf4" link="#0f766e" vlink="#115e59" alink="#14b8a6">
+<body class="page-tasks">
   <div class="wrap">
     <header>
-      <h1>Завдання</h1>
+      <h1 id="main-title">Завдання</h1>
       <nav class="nav">
         <a href="index.html">Головна</a>
         <a href="tasks.html">Завдання</a>
