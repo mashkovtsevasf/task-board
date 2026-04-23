@@ -96,6 +96,10 @@ header {
   margin-bottom: 1.25rem;
 }
 
+header > h1 + .nav {
+  margin-top: 0.35rem;
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -106,14 +110,14 @@ header {
   border: 1px solid var(--border);
 }
 
-.nav a {
+.nav > a {
   color: var(--accent-dark);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
-.nav a:hover {
+.nav > a:hover {
   text-decoration: underline;
   color: var(--accent);
 }
@@ -134,6 +138,27 @@ p {
 p.lead {
   font-size: 1.05rem;
   color: var(--muted);
+}
+
+main.panel p em {
+  color: #0d9488;
+  font-style: italic;
+}
+
+main.panel p strong {
+  color: #0f172a;
+}
+
+main.panel ul > li {
+  padding: 0.15rem 0;
+}
+
+main.panel ol > li {
+  padding: 0.15rem 0;
+}
+
+dl dt + dd {
+  margin-top: 0.15rem;
 }
 
 a:link,
