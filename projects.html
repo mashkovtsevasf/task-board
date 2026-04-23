@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskBoard — проєкти</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-projects" bgcolor="#eef3f8" background="images/clock.jpeg" link="#0f766e" vlink="#115e59" alink="#14b8a6">
+  <div class="wrap">
+    <header>
+      <h1>Проєкти</h1>
+      <nav class="nav">
+        <a href="index.html">Головна</a>
+        <a href="tasks.html">Завдання</a>
+        <a href="projects.html">Проєкти</a>
+        <a href="calendar.html">Календар</a>
+      </nav>
+    </header>
+    <main class="panel">
+      <p class="lead"><strong>Проєкти</strong> — це «коробки» для завдань: курс, диплом, хобі чи робота.</p>
+      <p>Так легше бачити, <em>скільки</em> навантаження на кожен напрям, і не губити дрібні кроки.</p>
+      <p>Нижче — <strong>розділи сайту</strong> й <em>приклад тижневого циклу</em> здачі роботи.</p>
+
+      <table class="simple-chart" border="1" cellspacing="0" cellpadding="6">
+        <caption>Розділи TaskBoard: іконка, посилання, короткий опис</caption>
+        <tr bgcolor="#ccfbf1">
+          <th>Головна</th>
+          <th>Завдання</th>
+          <th>Календар</th>
+          <th>GitHub</th>
+        </tr>
+        <tr>
+          <td><img src="images/brain.png" alt="головна" width="40" height="40"></td>
+          <td><img src="images/clock.jpeg" alt="завдання" width="40" height="40"></td>
+          <td><img src="images/time.jpg.webp" alt="календар" width="40" height="40"></td>
+          <td><img src="images/brain.png" alt="репозиторій" width="40" height="40"></td>
+        </tr>
+        <tr>
+          <td><a href="index.html">Головна</a></td>
+          <td><a href="tasks.html">Завдання</a></td>
+          <td><a href="calendar.html">Календар</a></td>
+          <td><a href="https://github.com">GitHub</a></td>
+        </tr>
+        <tr>
+          <td>Вхід і меню по сайту</td>
+          <td>Список справ і нотатки</td>
+          <td>Дедлайни та події</td>
+          <td>Віддалений репозиторій коду</td>
+        </tr>
+      </table>
+
+      <p>Приклад циклу підготовки до здачі:</p>
+      <table class="matrix" border="1" cellspacing="8" cellpadding="6" width="100%">
+        <caption>Тиждень і етапи перед дедлайном</caption>
+        <colgroup>
+          <col span="2" style="background:#ffffff">
+          <col span="2" style="background:#fff8e1">
+        </colgroup>
+        <tr align="left" valign="top">
+          <td rowspan="2">Два робочі тижні</td>
+          <td colspan="2" align="center">Один спільний дедлайн</td>
+          <td align="right">Нагадування в календарі</td>
+        </tr>
+        <tr align="center" valign="middle">
+          <td>Чернетка</td>
+          <td>Перевірка</td>
+          <td>Здача</td>
+        </tr>
+        <tr align="right">
+          <td>Пн</td>
+          <td>Вт</td>
+          <td>Ср</td>
+          <td align="left">Пт — відправити</td>
+        </tr>
+      </table>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+:root {
+  --panel: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --accent: #14b8a6;
+  --accent-dark: #0f766e;
+  --nav-bg: #ecfdf5;
+  --border: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+table.simple-chart {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+table.matrix {
+  border-collapse: separate;
+  border-spacing: 8px;
+}
+
+.wrap {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+header {
+  margin-bottom: 1.25rem;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--nav-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.nav a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+main.panel,
+.panel {
+  background: var(--panel);
+  padding: 1.1rem 1.25rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+p {
+  margin: 0.65rem 0;
+}
+
+p.lead {
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+a:link,
+a:visited {
+  color: var(--accent-dark);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+table {
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #0f172a;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.65rem;
+  vertical-align: middle;
+}
+
+th {
+  background: #ccfbf1;
+  color: #134e4a;
+}
+
+.img-inline {
+  display: block;
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+a.img-wrap {
+  display: inline-block;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+a.img-wrap:hover {
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  margin: 0.75rem 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+ul,
+ol,
+dl {
+  margin: 0.5rem 0 0.75rem;
+}
+
+dt {
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+dd {
+  margin-left: 1rem;
+  color: var(--muted);
+}
