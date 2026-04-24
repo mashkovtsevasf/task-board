@@ -29,10 +29,6 @@ body.page-home {
   background-color: #f4f6fb !important;
 }
 
-body.page-home {
-  background-color: pink;
-}
-
 body.page-tasks {
   background-color: #f0fdf4 !important;
 }
@@ -112,15 +108,40 @@ table.matrix {
 }
 
 .wrap {
-  position: relative;
   max-width: 44rem;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 2.5rem;
 }
 
 .header-block {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 30;
   margin-bottom: 1.25rem;
+  padding-bottom: 0.65rem;
+  box-shadow: 0 6px 14px -10px rgba(15, 23, 42, 0.15);
+}
+
+/* Фон як у body.* — щоб при прокрутці текст під шапкою не «просвічував» */
+body.page-home .header-block {
+  background-color: #f4f6fb;
+}
+
+/* Той самий селектор, але з !important — перебиває колір у блоці вище */
+/* body.page-home .header-block {
+  background-color: pink !important;
+} */
+
+body.page-tasks .header-block {
+  background-color: #f0fdf4;
+}
+
+body.page-projects .header-block {
+  background-color: #eef3f8;
+}
+
+body.page-calendar .header-block {
+  background-color: #fffbeb;
 }
 
 .corner-badge {
@@ -384,3 +405,196 @@ dd {
   color: var(--muted);
   border-left: 3px solid #ddd6fe;
 }
+
+/* ——— Панель TaskBoard (головна, #page-scripts) ——— */
+.tb-lab {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.tb-lab__intro h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  color: var(--text);
+}
+
+.tb-lab__intro p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 52rem;
+}
+
+.tb-lab__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  align-items: stretch;
+}
+
+@media (min-width: 900px) {
+  .tb-lab__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tb-card--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+.tb-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 1rem 1.15rem 1.1rem;
+  background: #fafbfc;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+/* Кнопки / блок дій — внизу картки в одному ряду сітки */
+.tb-card:not(.tb-card--sandbox) > *:last-child {
+  margin-top: auto;
+}
+
+.tb-card--sandbox {
+  height: auto;
+}
+
+.tb-card--sandbox > *:last-child {
+  margin-top: 0;
+}
+
+.tb-card p {
+  margin: 0;
+}
+
+.tb-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tb-card__display {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  background: var(--panel);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.tb-card__label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.tb-card__name {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tb-card__hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.tb-card--course .tb-card__hint code {
+  font-size: 0.8em;
+}
+
+.tb-details {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.tb-details summary {
+  cursor: pointer;
+  color: #475569;
+}
+
+.tb-details p {
+  margin: 0.4rem 0 0;
+  padding-left: 0.5rem;
+  border-left: 2px solid #e2e8f0;
+}
+
+.tb-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.tb-btn {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  min-height: 2.65rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.tb-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.tb-btn--accent {
+  color: #fff;
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.tb-btn--accent:hover {
+  background: #0d9488;
+  border-color: #0d9488;
+  color: #fff;
+}
+
+.tb-card--sandbox #author-snippet {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.tb-card--sandbox #dom-sandbox {
+  margin: 0;
+  padding: 0.5rem 0.65rem;
+  background: var(--panel);
+  border: 1px dashed #94a3b8;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.tb-card--sandbox #dom-sandbox .sandbox-line {
+  margin: 0.25rem 0;
+}
+
