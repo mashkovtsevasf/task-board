@@ -219,6 +219,27 @@ p.lead {
   color: var(--muted);
 }
 
+main.panel p em {
+  color: #0d9488;
+  font-style: italic;
+}
+
+main.panel p strong {
+  color: #0f172a;
+}
+
+main.panel ul > li {
+  padding: 0.15rem 0;
+}
+
+main.panel ol > li {
+  padding: 0.15rem 0;
+}
+
+dl dt + dd {
+  margin-top: 0.15rem;
+}
+
 a:link,
 a:visited {
   color: var(--accent-dark);
