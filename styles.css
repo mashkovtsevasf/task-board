@@ -60,6 +60,27 @@ h1#main-title {
   text-align: left;
 }
 
+h1#main-title::before {
+  content: "";
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.95em;
+  margin-right: 0.45rem;
+  vertical-align: -0.06em;
+  border-radius: 2px;
+  background-color: var(--accent);
+}
+
+h1#main-title::after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 3px;
+  margin-top: 0.35rem;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
 main.panel a:link,
 main.panel a:visited {
   font-size: 0.95rem;
@@ -76,6 +97,10 @@ main.panel a:hover {
   text-decoration: underline;
 }
 
+main.panel a:active {
+  color: #0f766e;
+}
+
 table.simple-chart {
   border-collapse: separate;
   border-spacing: 0;
@@ -87,13 +112,33 @@ table.matrix {
 }
 
 .wrap {
+  position: relative;
   max-width: 44rem;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 2.5rem;
 }
 
-header {
+.header-block {
+  position: relative;
   margin-bottom: 1.25rem;
+}
+
+.corner-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+header {
+  margin-bottom: 0;
 }
 
 .nav {
@@ -106,7 +151,8 @@ header {
   border: 1px solid var(--border);
 }
 
-.nav a {
+.nav a:link,
+.nav a:visited {
   color: var(--accent-dark);
   text-decoration: none;
   font-weight: 600;
@@ -116,6 +162,39 @@ header {
 .nav a:hover {
   text-decoration: underline;
   color: var(--accent);
+}
+
+.nav a:active {
+  color: #0e7490;
+  text-decoration: none;
+}
+
+.nav a:first-child {
+  padding-right: 0.55rem;
+  margin-right: 0.15rem;
+  border-right: 1px solid var(--border);
+}
+
+main.panel .aside-float {
+  max-width: 11rem;
+  margin: 0 0.85rem 0.65rem 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ecfeff;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+main.panel .aside-float span {
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+main.panel::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 main.panel,

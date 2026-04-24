@@ -15,20 +15,27 @@
     main.panel a:hover {
       color: #1e3a8a !important;
     }
+    main.panel a:active {
+      color: #b45309 !important;
+    }
   </style>
 </head>
 <body id="top" class="page-home">
   <div class="wrap">
-    <header>
-      <h1 id="main-title">TaskBoard</h1>
-      <nav class="nav">
-        <a href="index.html">Головна</a>
-        <a href="tasks.html">Завдання</a>
-        <a href="projects.html">Проєкти</a>
-        <a href="calendar.html">Календар</a>
-      </nav>
-    </header>
+    <div class="header-block">
+      <div class="corner-badge"><span>LR</span></div>
+      <header>
+        <h1 id="main-title"><span>TaskBoard</span></h1>
+        <nav class="nav">
+          <a href="index.html">Головна</a>
+          <a href="tasks.html">Завдання</a>
+          <a href="projects.html">Проєкти</a>
+          <a href="calendar.html">Календар</a>
+        </nav>
+      </header>
+    </div>
     <main class="panel">
+      <div class="aside-float" style="float: left"><span>Підказка:</span> розділи зверху — швидкий перехід між сторінками.</div>
       <p class="lead" style="font-size: 1.08rem !important; line-height: 1.7 !important; color: #334155 !important;"><strong>TaskBoard</strong> — твоя невелика дошка для навчання: завдання, проєкти й дати в одному місці.</p>
       <p>Розділи допомагають <strong>не змішувати</strong> лабораторні, <em>курсові</em> й особисті справи.</p>
       <p><a href="#about">Як цим користуватися</a></p>
