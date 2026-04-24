@@ -141,6 +141,10 @@ header {
   margin-bottom: 0;
 }
 
+header > h1 + .nav {
+  margin-top: 0.35rem;
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -151,25 +155,25 @@ header {
   border: 1px solid var(--border);
 }
 
-.nav a:link,
-.nav a:visited {
+.nav > a:link,
+.nav > a:visited {
   color: var(--accent-dark);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
-.nav a:hover {
+.nav > a:hover {
   text-decoration: underline;
   color: var(--accent);
 }
 
-.nav a:active {
+.nav > a:active {
   color: #0e7490;
   text-decoration: none;
 }
 
-.nav a:first-child {
+.nav > a:first-child {
   padding-right: 0.55rem;
   margin-right: 0.15rem;
   border-right: 1px solid var(--border);
