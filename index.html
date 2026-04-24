@@ -23,7 +23,7 @@
 <body id="top" class="page-home">
   <div class="wrap">
     <div class="header-block">
-      <div class="corner-badge"><span>LR</span></div>
+      <div class="corner-badge"><span>MS</span></div>
       <header>
         <h1 id="main-title"><span>TaskBoard</span></h1>
         <nav class="nav">
@@ -43,7 +43,132 @@
       <p>Корисно нагадати собі основи розмітки: <a href="https://uk.wikipedia.org/wiki/HTML">Вікіпедія про HTML</a>.</p>
       <p id="about"><strong>Як користуватися:</strong> додавай завдання в «Завдання», групуй їх у «Проєкти», а в «Календар» відмічай <em>дедлайни</em>.</p>
       <p><a href="#top">На початок сторінки</a></p>
+
+      <section id="page-scripts" class="tb-lab" aria-labelledby="page-scripts-title">
+        <header class="tb-lab__intro">
+          <h2 id="page-scripts-title">Панель TaskBoard</h2>
+          <p>
+            Підпис, чернетка й перехід до завдань — як на справжній дошці. Окремо внизу — невелика зона для вправи з DOM
+            (вона не змінює ваші списки на інших сторінках).
+          </p>
+        </header>
+
+        <div class="tb-lab__grid">
+          <section class="tb-card" aria-labelledby="tb-profile-heading">
+            <h3 id="tb-profile-heading">Підпис на дошці</h3>
+            <p class="tb-card__display">
+              <span class="tb-card__label">Зараз показується:</span>
+              <strong id="board-display-name" class="tb-card__name">—</strong>
+            </p>
+            <p class="tb-card__hint">Зберігається лише в цьому браузері після підтвердження у вікні.</p>
+            <details class="tb-details">
+              <summary>Для звіту: де лежить значення</summary>
+              <p><code>localStorage</code>, ключ <code>taskboardDisplayName</code>.</p>
+            </details>
+            <button type="button" id="btn-native-windows" class="tb-btn tb-btn--accent">Змінити підпис</button>
+          </section>
+
+          <section class="tb-card" aria-labelledby="tb-work-heading">
+            <h3 id="tb-work-heading">Робота зі списками</h3>
+            <p class="tb-card__hint">Перехід до списку завдань, чернетка з трьох пунктів, порівняння двох назв.</p>
+            <div class="tb-card__actions">
+              <button type="button" id="btn-open-tasks" class="tb-btn tb-btn--accent">Відкрити «Завдання»</button>
+              <button type="button" id="btn-user-lines" class="tb-btn">Чернетка з 3 пунктів</button>
+              <button type="button" id="btn-string-compare" class="tb-btn">Порівняти дві назви</button>
+            </div>
+          </section>
+
+          <section class="tb-card" aria-labelledby="tb-look-heading">
+            <h3 id="tb-look-heading">Вигляд головної</h3>
+            <p class="tb-card__hint">Коротка підсвітка фону, щоб перевірити роботу зі сторінкою.</p>
+            <div class="tb-card__actions">
+              <button type="button" id="btn-temp-background" class="tb-btn">Підсвітити фон на 30 с</button>
+            </div>
+          </section>
+
+          <section class="tb-card tb-card--course" aria-labelledby="tb-course-heading">
+            <h3 id="tb-course-heading">Демо для звіту (JavaScript)</h3>
+            <p class="tb-card__hint">Картка автора, маніпуляції DOM, <code>document.write</code> у новому вікні.</p>
+            <div class="tb-card__actions">
+              <button type="button" id="btn-author-card" class="tb-btn">Автор TaskBoard</button>
+              <button type="button" id="btn-dom-demo" class="tb-btn">Змінити чернетку (DOM)</button>
+              <button type="button" id="btn-document-write" class="tb-btn">Нове вікно (write)</button>
+            </div>
+          </section>
+
+          <section class="tb-card tb-card--wide tb-card--sandbox" aria-labelledby="tb-sandbox-heading">
+            <h3 id="tb-sandbox-heading">Зона «чернетка» для DOM</h3>
+            <p id="author-snippet" data-role="автор">Рядок автора — його змінить демо DOM нижче.</p>
+            <div id="dom-sandbox">
+              <p class="sandbox-line">Завдання: перевірити список на tasks.html</p>
+              <p class="sandbox-line">Проєкт: оформлення TaskBoard</p>
+            </div>
+          </section>
+        </div>
+      </section>
     </main>
   </div>
+  <script>
+    (function () {
+      function bindNativeWindowsDemo() {
+        window.alert(
+          "TaskBoard — крок 1 з 3: alert.\n\n" +
+            "Далі з’явиться prompt: введіть ім’я або нік, яким ви підписуєтесь на дошці.\n" +
+            "Якщо у prompt натиснете «Скасувати», вікно підтвердження (confirm) не відкриється."
+        );
+        var name = window.prompt(
+          "TaskBoard — крок 2 з 3: prompt.\n\nЯк до вас звертатися на дошці (ім’я або нік)?",
+          ""
+        );
+        if (name === null) {
+          window.alert("TaskBoard: введення імені скасовано — поверніться до кнопки, коли будете готові.");
+          return;
+        }
+        var accepted = window.confirm(
+          "TaskBoard — крок 3 з 3: confirm.\n\nПідпис на дошці: «" +
+            name +
+            "».\n\nOK — зберегти в localStorage і показати в блоці «Підпис на дошці» нижче.\nСкасувати — не зберігати."
+        );
+        if (!accepted) {
+          window.alert("TaskBoard: підпис не збережено (у confirm натиснуто Скасувати).");
+          return;
+        }
+        var trimmed = name.trim();
+        if (trimmed === "") {
+          window.alert("TaskBoard: підпис лише з пробілів — нічого не збережено, введіть букви або цифри.");
+          return;
+        }
+        try {
+          window.localStorage.setItem("taskboardDisplayName", trimmed);
+        } catch (err) {
+          window.alert("TaskBoard: не вдалося записати в localStorage (наприклад, приватний режим).");
+          return;
+        }
+        var slot = document.getElementById("board-display-name");
+        if (slot) {
+          slot.textContent = trimmed;
+        }
+      }
+      function applyStoredBoardName() {
+        try {
+          var stored = window.localStorage.getItem("taskboardDisplayName");
+          var slot = document.getElementById("board-display-name");
+          if (stored && slot) {
+            slot.textContent = stored;
+          }
+        } catch (err) {
+          /* ignore */
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        applyStoredBoardName();
+        var b = document.getElementById("btn-native-windows");
+        if (b) {
+          b.addEventListener("click", bindNativeWindowsDemo);
+        }
+      });
+    })();
+  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
