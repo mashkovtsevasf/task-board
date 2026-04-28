@@ -1,9 +1,20 @@
-function userDialog() {
-  var max = 3;
-  var lines = [];
-  var i;
+/**
+ * Зовнішній скрипт головної (лабораторна, п. 1–2).
+ *
+ * П.1: dialogWithUser — змінні, розгалуження, цикл; showDeveloper (посада за замовчуванням);
+ *       compareStringsAlert; flashPageBackground через document.body.
+ * П.2: redirectWithLocation; getElementById / querySelectorAll; textContent, innerHTML,
+ *       outerHTML, nodeValue, dataset; document.write; createElement, createTextNode;
+ *       append, prepend, after, replaceWith, remove — у domManipulationDemo та documentWriteDemoWindow.
+ */
+
+/** Діалог з користувачем — змінні, умовне розгалуження, цикл. */
+function dialogWithUser() {
+  const max = 3;
+  const lines = [];
+  let i;
   for (i = 1; i <= max; i++) {
-    var line = window.prompt(
+    const line = window.prompt(
       "TaskBoard — чернетка списку (пункт " +
         i +
         " з " +
@@ -20,7 +31,7 @@ function userDialog() {
     if (line.trim() === "") {
       continue;
     }
-    lines.push(line);
+    lines.push(line.trim());
   }
   if (lines.length === 0) {
     window.alert("TaskBoard: чернетка порожня — додайте хоча б один пункт і спробуйте знову.");
@@ -45,25 +56,24 @@ function showDeveloper(lastName, firstName, position) {
 }
 
 function compareStringsAlert(a, b) {
-  var s1 = a === null || a === undefined ? "" : String(a);
-  var s2 = b === null || b === undefined ? "" : String(b);
-  var greater = s1.localeCompare(s2) >= 0 ? s1 : s2;
+  const s1 = a === null || a === undefined ? "" : String(a);
+  const s2 = b === null || b === undefined ? "" : String(b);
+  const greater = s1.localeCompare(s2) >= 0 ? s1 : s2;
   window.alert(
-    "TaskBoard — порівняння двох назв (алфавітний порядок).\n\n" +
-      "«Більший» рядок за localeCompare:\n\n" +
+    "TaskBoard — порівняння двох рядків за алфавітом (як у словнику), а не за довжиною.\n\n" +
+      "Пізніший за алфавітом рядок (метод localeCompare):\n\n" +
       greater
   );
 }
 
 function flashPageBackground(seconds) {
-  var sec = seconds === undefined ? 30 : Number(seconds);
+  let sec = seconds === undefined ? 30 : Number(seconds);
   if (Number.isNaN(sec) || sec < 1) {
     sec = 30;
   }
-  var body = document.body;
-  /* У styles.css для body.page-* часто стоїть background … !important — без important інлайн не спрацює. */
-  var prevColor = body.style.getPropertyValue("background-color");
-  var prevPri = body.style.getPropertyPriority("background-color");
+  const body = document.body;
+  const prevColor = body.style.getPropertyValue("background-color");
+  const prevPri = body.style.getPropertyPriority("background-color");
   body.style.setProperty("background-color", "#fef9c3", "important");
   window.setTimeout(function () {
     if (prevColor) {
@@ -83,7 +93,7 @@ function redirectWithLocation() {
 }
 
 function documentWriteDemoWindow() {
-  var w = window.open("", "_blank", "width=400,height=180");
+  const w = window.open("", "_blank", "width=400,height=180");
   if (!w) {
     return;
   }
@@ -94,48 +104,52 @@ function documentWriteDemoWindow() {
 }
 
 function domManipulationDemo() {
-  var playground = document.getElementById("dom-sandbox");
+  const playground = document.getElementById("dom-sandbox");
   if (!playground) {
     return;
   }
 
-  var rows = playground.querySelectorAll(".sandbox-line");
+  const rows = playground.querySelectorAll(".sandbox-line");
+  let msg = "";
+
   if (rows.length > 0) {
     rows[0].textContent = rows[0].textContent + " [textContent]";
-    rows[0].innerHTML = "<b>innerHTML</b>";
+    msg += "outerHTML (фрагмент, рядок 1):\n" + rows[0].outerHTML.slice(0, 100) + "…\n\n";
+  }
+  if (rows.length > 1) {
+    rows[1].innerHTML = "<strong>innerHTML</strong> у другому рядку";
+    msg += "outerHTML (фрагмент, рядок 2):\n" + rows[1].outerHTML.slice(0, 100) + "…\n\n";
   }
 
-  var host = document.getElementById("author-snippet");
-  var msg = "";
+  const host = document.getElementById("author-snippet");
   if (host) {
-    msg += "outerHTML: " + host.outerHTML.slice(0, 80) + "\n";
-    host.innerHTML = "<i>innerHTML</i>";
-    msg += "dataset.role: " + host.dataset.role + "\n";
+    msg += "data (dataset.role з data-role):\n" + host.dataset.role + "\n\n";
+    host.textContent = "Рядок автора оновлено через textContent після читання dataset.";
   }
 
-  var c = document.createComment("c");
+  const c = document.createComment(" lab-dom-comment ");
   playground.insertBefore(c, playground.firstChild);
-  msg += "nodeValue: " + c.nodeValue;
+  msg += "nodeValue для вузла-коментаря:\n«" + c.nodeValue + "»";
 
-  window.alert("TaskBoard — фрагменти DOM (перший блок демо):\n\n" + msg);
+  window.alert("TaskBoard — п.2: getElementById, querySelectorAll; textContent, innerHTML, outerHTML, dataset, nodeValue:\n\n" + msg);
 
-  var pNew = document.createElement("p");
+  const pNew = document.createElement("p");
   pNew.append(document.createTextNode("createTextNode + "));
-  pNew.append("append");
+  pNew.append("append (рядок)");
   playground.prepend(pNew);
 
-  var mark = document.createElement("span");
-  mark.textContent = "x";
-  var lastEl = playground.lastElementChild;
+  const mark = document.createElement("span");
+  mark.textContent = "×";
+  const lastEl = playground.lastElementChild;
   if (lastEl) {
     lastEl.after(mark);
   }
 
-  var repl = document.createElement("p");
+  const repl = document.createElement("p");
   repl.textContent = "replaceWith";
   mark.replaceWith(repl);
 
-  var ghost = document.createElement("small");
+  const ghost = document.createElement("small");
   ghost.textContent = "remove";
   repl.after(ghost);
   ghost.remove();
@@ -143,22 +157,21 @@ function domManipulationDemo() {
 
 function runDeveloperDemos() {
   showDeveloper("Машковцева", "Софія");
-  showDeveloper("Машковцева", "Софія", "Розробниця інтерфейсу TaskBoard");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var pairs = [
-    ["btn-user-lines", userDialog],
+  const pairs = [
+    ["btn-user-lines", dialogWithUser],
     ["btn-author-card", runDeveloperDemos],
     [
       "btn-string-compare",
       function () {
         compareStringsAlert(
           window.prompt(
-            "TaskBoard — порівняння назв.\n\nПерша назва (наприклад, завдання або проєкт):",
+            "TaskBoard — порівняння за алфавітом (не за довжиною).\n\nПерший рядок:",
             ""
           ),
-          window.prompt("Друга назва для порівняння:", "")
+          window.prompt("Другий рядок:", "")
         );
       },
     ],
@@ -166,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-temp-background",
       function () {
         window.alert(
-          "TaskBoard: на 30 секунд зміниться фон головної сторінки (демо document.body), потім повернеться як був."
+          "TaskBoard: на 30 секунд зміниться фон головної сторінки (document.body), потім повернеться як був."
         );
         flashPageBackground(30);
       },
@@ -175,9 +188,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ["btn-dom-demo", domManipulationDemo],
     ["btn-document-write", documentWriteDemoWindow],
   ];
-  var j;
+  let j;
   for (j = 0; j < pairs.length; j++) {
-    var btn = document.getElementById(pairs[j][0]);
+    const btn = document.getElementById(pairs[j][0]);
     if (btn) {
       btn.addEventListener("click", pairs[j][1]);
     }

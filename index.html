@@ -72,11 +72,11 @@
 
           <section class="tb-card" aria-labelledby="tb-work-heading">
             <h3 id="tb-work-heading">Робота зі списками</h3>
-            <p class="tb-card__hint">Перехід до списку завдань, чернетка з трьох пунктів, порівняння двох назв.</p>
+            <p class="tb-card__hint">Перехід до списку завдань, чернетка з трьох пунктів, порівняння двох рядків за алфавітом (не за довжиною).</p>
             <div class="tb-card__actions">
               <button type="button" id="btn-open-tasks" class="tb-btn tb-btn--accent">Відкрити «Завдання»</button>
               <button type="button" id="btn-user-lines" class="tb-btn">Чернетка з 3 пунктів</button>
-              <button type="button" id="btn-string-compare" class="tb-btn">Порівняти дві назви</button>
+              <button type="button" id="btn-string-compare" class="tb-btn">Порівняти за алфавітом</button>
             </div>
           </section>
 
@@ -118,7 +118,7 @@
             "Далі з’явиться prompt: введіть ім’я або нік, яким ви підписуєтесь на дошці.\n" +
             "Якщо у prompt натиснете «Скасувати», вікно підтвердження (confirm) не відкриється."
         );
-        var name = window.prompt(
+        const name = window.prompt(
           "TaskBoard — крок 2 з 3: prompt.\n\nЯк до вас звертатися на дошці (ім’я або нік)?",
           ""
         );
@@ -126,7 +126,7 @@
           window.alert("TaskBoard: введення імені скасовано — поверніться до кнопки, коли будете готові.");
           return;
         }
-        var accepted = window.confirm(
+        const accepted = window.confirm(
           "TaskBoard — крок 3 з 3: confirm.\n\nПідпис на дошці: «" +
             name +
             "».\n\nOK — зберегти в localStorage і показати в блоці «Підпис на дошці» нижче.\nСкасувати — не зберігати."
@@ -135,7 +135,7 @@
           window.alert("TaskBoard: підпис не збережено (у confirm натиснуто Скасувати).");
           return;
         }
-        var trimmed = name.trim();
+        const trimmed = name.trim();
         if (trimmed === "") {
           window.alert("TaskBoard: підпис лише з пробілів — нічого не збережено, введіть букви або цифри.");
           return;
@@ -146,15 +146,15 @@
           window.alert("TaskBoard: не вдалося записати в localStorage (наприклад, приватний режим).");
           return;
         }
-        var slot = document.getElementById("board-display-name");
+        const slot = document.getElementById("board-display-name");
         if (slot) {
           slot.textContent = trimmed;
         }
       }
       function applyStoredBoardName() {
         try {
-          var stored = window.localStorage.getItem("taskboardDisplayName");
-          var slot = document.getElementById("board-display-name");
+          const stored = window.localStorage.getItem("taskboardDisplayName");
+          const slot = document.getElementById("board-display-name");
           if (stored && slot) {
             slot.textContent = stored;
           }
@@ -164,7 +164,7 @@
       }
       document.addEventListener("DOMContentLoaded", function () {
         applyStoredBoardName();
-        var b = document.getElementById("btn-native-windows");
+        const b = document.getElementById("btn-native-windows");
         if (b) {
           b.addEventListener("click", bindNativeWindowsDemo);
         }
