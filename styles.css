@@ -588,6 +588,19 @@ dd {
 .tb-card--sandbox #author-snippet {
   margin: 0;
   font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tb-card--sandbox #author-snippet .author-snippet__meta {
+  color: #64748b;
+}
+
+.tb-card--sandbox #author-snippet .author-snippet__tail {
+  font-weight: 500;
+}
+
+.tb-card--sandbox #author-snippet .author-snippet__invite {
+  color: #334155;
 }
 
 .tb-card--sandbox #dom-sandbox {

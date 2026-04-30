@@ -63,6 +63,31 @@ function persistHomeDraft(lines) {
   }
 }
 
+function setAuthorSnippetAfterDraftSave(host, whenRaw, roleRaw) {
+  if (!host) {
+    return;
+  }
+  const when = escapeHtml(whenRaw || "щойно");
+  const role = escapeHtml(roleRaw || "автор");
+  host.innerHTML =
+    '<span class="author-snippet__meta">Останнє оновлення чернетки: ' +
+    when +
+    '</span> <span class="author-snippet__tail">Рядок про ' +
+    role +
+    ".</span>";
+}
+
+function setAuthorSnippetInviteSave(host, roleRaw) {
+  if (!host) {
+    return;
+  }
+  const role = escapeHtml(roleRaw || "автор");
+  host.innerHTML =
+    '<span class="author-snippet__invite">Рядок про ' +
+    role +
+    " — натисни «Швидкі три рядки в чернетку» вище, щоб зберегти рядки й час оновлення тут.</span>";
+}
+
 function getDraftUpdatedLabel() {
   try {
     const t = localStorage.getItem(HOMEDRAFT_UPDATED_KEY);
@@ -96,6 +121,10 @@ function renderDraftInSandbox(lines) {
     p0.className = "sandbox-line";
     p0.textContent = "Порожньо — додай рядки кнопкою «Швидкі три рядки в чернетку».";
     playground.appendChild(p0);
+    const hostEmpty = document.getElementById("author-snippet");
+    if (hostEmpty) {
+      setAuthorSnippetInviteSave(hostEmpty, hostEmpty.dataset.role || "автор");
+    }
     return;
   }
   let i;
@@ -109,8 +138,7 @@ function renderDraftInSandbox(lines) {
   if (host) {
     const role = host.dataset.role || "автор";
     const when = getDraftUpdatedLabel();
-    host.textContent =
-      "Останнє оновлення чернетки: " + (when || "щойно") + ". Рядок про " + role + ".";
+    setAuthorSnippetAfterDraftSave(host, when, role);
   }
 }
 
@@ -278,6 +306,12 @@ function buildDraftPreviewDocumentHtml() {
     }
     bodyHtml += "</ol>";
   }
+  const authorEl = document.getElementById("author-snippet");
+  if (authorEl) {
+    bodyHtml +=
+      "<p style=\"margin:1.25rem 0 0.35rem;font-size:0.82rem;color:#64748b;\">Підпис з головної дошки</p>" +
+      authorEl.outerHTML;
+  }
   return (
     "<!DOCTYPE html><html lang=\"uk\"><head><meta charset=\"UTF-8\"><title>TaskBoard — перегляд</title>" +
     "<style>body{font-family:system-ui,sans-serif;padding:1rem;line-height:1.45;}</style></head><body>" +
@@ -329,10 +363,7 @@ function resetAuthorSnippetWhenNoDraft() {
   const host = document.getElementById("author-snippet");
   if (host) {
     const role = host.dataset.role || "автор";
-    host.textContent =
-      "Рядок про " +
-      role +
-      " — натисни «Швидкі три рядки в чернетку» вище, щоб зберегти рядки й час оновлення тут.";
+    setAuthorSnippetInviteSave(host, role);
   }
 }
 
