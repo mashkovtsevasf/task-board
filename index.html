@@ -152,6 +152,37 @@
             <p id="tb-event-log" class="tb-card__hint" aria-live="polite"></p>
             <button type="button" id="tb-unbind-panel-trace" class="tb-btn">Не записувати кліки панелі оголошень у журнал</button>
           </section>
+
+          <section class="tb-card tb-card--wide tb-mouse-drag-lab" aria-labelledby="tb-mouse-lab-heading">
+            <h3 id="tb-mouse-lab-heading">Наведення й перетягування на дошці</h3>
+            <p class="tb-card__hint tb-mouse-drag-lab__caption">Тиждень</p>
+            <div id="tb-hover-grid" class="tb-hover-grid" role="group" aria-label="Тиждень">
+              <div class="tb-hover-grid__cell" data-day="Пн">Пн</div>
+              <div class="tb-hover-grid__cell" data-day="Вт">Вт</div>
+              <div class="tb-hover-grid__cell" data-day="Ср">Ср</div>
+              <div class="tb-hover-grid__cell" data-day="Чт">Чт</div>
+              <div class="tb-hover-grid__cell" data-day="Пт">Пт</div>
+            </div>
+            <p class="tb-card__hint tb-mouse-drag-lab__caption">Мітка з плану</p>
+            <div class="tb-drag-lab">
+              <div class="tb-drag-lab__row">
+                <span class="tb-drag-lab__label">План</span>
+                <div id="tb-drag-track" class="tb-drag-track">
+                  <span class="tb-drag-token" title="Перетягни в зону нижче">
+                    <img class="tb-drag-token__icon" src="images/brain.png" alt="" width="20" height="20" />
+                    ЛР7: події миші
+                  </span>
+                  <span class="tb-drag-token" title="Перетягни в зону нижче">Конспект лекції</span>
+                  <span class="tb-drag-token" title="Перетягни в зону нижче">Чернетка звіту</span>
+                  <span class="tb-drag-token" title="Перетягни в зону нижче">Практика HTML</span>
+                </div>
+              </div>
+              <div class="tb-drag-lab__targets">
+                <div id="tb-drop-today" class="tb-drop-zone" data-zone="Сьогодні">Сьогодні</div>
+                <div id="tb-drop-later" class="tb-drop-zone" data-zone="Потім">Потім</div>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </main>

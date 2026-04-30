@@ -517,6 +517,139 @@ const taskboardPanelTracer = {
   },
 };
 
+function initMouseHoverGridLab() {
+  const grid = document.getElementById("tb-hover-grid");
+  if (!grid) {
+    return;
+  }
+
+  grid.addEventListener("mouseover", function (event) {
+    const cell = event.target.closest(".tb-hover-grid__cell");
+    if (!cell || !grid.contains(cell)) {
+      return;
+    }
+    cell.classList.add("tb-hover-grid__cell--hot");
+  });
+
+  grid.addEventListener("mouseout", function (event) {
+    const cell = event.target.closest(".tb-hover-grid__cell");
+    if (!cell || !grid.contains(cell)) {
+      return;
+    }
+    const rel = event.relatedTarget;
+    if (rel && cell.contains(rel)) {
+      return;
+    }
+    cell.classList.remove("tb-hover-grid__cell--hot");
+  });
+}
+
+function initDragTokenLab() {
+  const track = document.getElementById("tb-drag-track");
+  const dropToday = document.getElementById("tb-drop-today");
+  const dropLater = document.getElementById("tb-drop-later");
+  const tokens = track ? track.querySelectorAll(".tb-drag-token") : [];
+  if (!track || tokens.length === 0) {
+    return;
+  }
+
+  const zones = [dropToday, dropLater].filter(Boolean);
+  let dragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+  let activeToken = null;
+
+  function clearZoneHover() {
+    zones.forEach(function (z) {
+      if (z) {
+        z.classList.remove("tb-drop-zone--over");
+      }
+    });
+  }
+
+  function onMouseMove(moveEvent) {
+    if (!dragging || !activeToken) {
+      return;
+    }
+    activeToken.style.position = "fixed";
+    activeToken.style.left = moveEvent.clientX - offsetX + "px";
+    activeToken.style.top = moveEvent.clientY - offsetY + "px";
+    zones.forEach(function (z) {
+      if (!z) {
+        return;
+      }
+      const r = z.getBoundingClientRect();
+      const inside =
+        moveEvent.clientX >= r.left &&
+        moveEvent.clientX <= r.right &&
+        moveEvent.clientY >= r.top &&
+        moveEvent.clientY <= r.bottom;
+      z.classList.toggle("tb-drop-zone--over", inside);
+    });
+  }
+
+  function onMouseUp(upEvent) {
+    if (!dragging || !activeToken) {
+      return;
+    }
+    const token = activeToken;
+    dragging = false;
+    activeToken = null;
+    document.body.classList.remove("tb-drag-active");
+    token.classList.remove("tb-drag-token--dragging");
+    clearZoneHover();
+    token.style.position = "";
+    token.style.left = "";
+    token.style.top = "";
+
+    let dropped = null;
+    zones.forEach(function (z) {
+      if (!z) {
+        return;
+      }
+      const r = z.getBoundingClientRect();
+      if (
+        upEvent.clientX >= r.left &&
+        upEvent.clientX <= r.right &&
+        upEvent.clientY >= r.top &&
+        upEvent.clientY <= r.bottom
+      ) {
+        dropped = z;
+      }
+    });
+
+    if (dropped) {
+      dropped.appendChild(token);
+    } else {
+      track.appendChild(token);
+    }
+
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  }
+
+  tokens.forEach(function (token) {
+    token.addEventListener("mousedown", function (downEvent) {
+      if (downEvent.button !== 0) {
+        return;
+      }
+      downEvent.preventDefault();
+      dragging = true;
+      activeToken = token;
+      const rect = token.getBoundingClientRect();
+      offsetX = downEvent.clientX - rect.left;
+      offsetY = downEvent.clientY - rect.top;
+      token.classList.add("tb-drag-token--dragging");
+      document.body.classList.add("tb-drag-active");
+      token.style.position = "fixed";
+      token.style.left = downEvent.clientX - offsetX + "px";
+      token.style.top = downEvent.clientY - offsetY + "px";
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+    });
+  });
+}
+
 function initTaskboardBoardUi() {
   const hit = document.getElementById("tb-canvas-hit");
   const menu = document.getElementById("tb-board-menu");
@@ -572,6 +705,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   initTaskboardBoardUi();
+  initMouseHoverGridLab();
+  initDragTokenLab();
   loadSavedDraftIntoSandbox();
   fillTasksDraftHost();
   restoreFocusFromStorage();
