@@ -466,6 +466,11 @@ dd {
   height: auto;
 }
 
+/* Прокрутка до чернетки: цілий блок + відступ під липку шапку */
+#tb-draft-card {
+  scroll-margin-top: 5.5rem;
+}
+
 .tb-card--sandbox > *:last-child {
   margin-top: 0;
 }
@@ -588,6 +593,7 @@ dd {
 .tb-card--sandbox #dom-sandbox {
   margin: 0;
   padding: 0.5rem 0.65rem;
+  min-height: 9.5rem;
   background: var(--panel);
   border: 1px dashed #94a3b8;
   border-radius: 8px;
@@ -596,5 +602,118 @@ dd {
 
 .tb-card--sandbox #dom-sandbox .sandbox-line {
   margin: 0.25rem 0;
+}
+
+/* Мітки та команди дошки (події миші, делегування, data-behavior) */
+.tb-focus-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.tb-focus-list__item {
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tb-focus-list__item:last-child {
+  border-bottom: 0;
+}
+
+.tb-focus-list__item:hover {
+  background: #f8fafc;
+}
+
+.tb-focus-list__item.is-selected {
+  background: #ecfdf5;
+  box-shadow: inset 3px 0 0 var(--accent-dark);
+}
+
+.tb-board-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tb-board-menu .tb-board-menu__btn {
+  flex: 1 1 auto;
+  min-width: 8rem;
+  width: auto;
+}
+
+.tb-canvas-hit {
+  padding: 0.65rem 0.75rem;
+  min-height: 2.75rem;
+  border: 1px dashed #94a3b8;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.tb-canvas-hit:focus-visible {
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.45);
+}
+
+.tb-target-panel {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  font-size: 0.875rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.tb-target-panel:focus-visible {
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.35);
+}
+
+.tb-sandbox-spotlight {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 2px;
+  transition: outline 0.2s ease;
+}
+
+/* Чернетка з головної на сторінці «Завдання» */
+body.page-tasks .tasks-home-draft {
+  margin-top: 1.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+body.page-tasks .tasks-home-draft h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+body.page-tasks .tasks-home-draft__hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+body.page-tasks #tasks-home-draft ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+  padding-right: 0.75rem;
+  background: var(--panel);
+}
+
+body.page-tasks #tasks-home-draft li {
+  margin: 0.2rem 0;
 }
 

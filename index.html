@@ -50,8 +50,8 @@
         <header class="tb-lab__intro">
           <h2 id="page-scripts-title">Панель TaskBoard</h2>
           <p>
-            Підпис, чернетка й перехід до завдань — як на справжній дошці. Окремо внизу — невелика зона для вправи з DOM
-            (вона не змінює ваші списки на інших сторінках).
+            Тут збирається те, що зазвичай роблять на дошці: хто працює, швидкі нотатки, перехід до списку завдань і дрібні
+            службові дії — лише для цієї сторінки в браузері.
           </p>
         </header>
 
@@ -64,47 +64,93 @@
             </p>
             <p class="tb-card__hint">Зберігається лише в цьому браузері після підтвердження у вікні.</p>
             <details class="tb-details">
-              <summary>Для звіту: де лежить значення</summary>
-              <p><code>localStorage</code>, ключ <code>taskboardDisplayName</code>.</p>
+              <summary>Де зберігається підпис</summary>
+              <p>У пам’яті цього браузера (ключ <code>taskboardDisplayName</code>).</p>
             </details>
-            <button type="button" id="btn-native-windows" class="tb-btn tb-btn--accent">Змінити підпис</button>
+            <button type="button" id="btn-native-windows" class="tb-btn tb-btn--accent">Задати ім’я на дошці</button>
           </section>
 
           <section class="tb-card" aria-labelledby="tb-work-heading">
-            <h3 id="tb-work-heading">Робота зі списками</h3>
-            <p class="tb-card__hint">Перехід до списку завдань, чернетка з трьох пунктів, порівняння двох рядків за алфавітом (не за довжиною).</p>
+            <h3 id="tb-work-heading">Завдання й чернетка</h3>
+            <p class="tb-card__hint">
+              Перейди до повного списку, швидко занотуй до трьох рядків (вони з’являться внизу на головній і на «Завдання») або звір дві назви за алфавітом.
+            </p>
             <div class="tb-card__actions">
-              <button type="button" id="btn-open-tasks" class="tb-btn tb-btn--accent">Відкрити «Завдання»</button>
-              <button type="button" id="btn-user-lines" class="tb-btn">Чернетка з 3 пунктів</button>
-              <button type="button" id="btn-string-compare" class="tb-btn">Порівняти за алфавітом</button>
+              <button type="button" id="btn-open-tasks" class="tb-btn tb-btn--accent">Перейти до «Завдання»</button>
+              <button type="button" id="btn-user-lines" class="tb-btn">Швидкі три рядки в чернетку</button>
+              <button type="button" id="btn-string-compare" class="tb-btn">Яка назва пізніша за алфавітом?</button>
             </div>
           </section>
 
           <section class="tb-card" aria-labelledby="tb-look-heading">
-            <h3 id="tb-look-heading">Вигляд головної</h3>
-            <p class="tb-card__hint">Коротка підсвітка фону, щоб перевірити роботу зі сторінкою.</p>
+            <h3 id="tb-look-heading">Нагадування кольором</h3>
+            <p class="tb-card__hint">На пів хвилини змінимо фон головної — зручно перевірити, що сторінка «жива», потім усе повернеться.</p>
             <div class="tb-card__actions">
-              <button type="button" id="btn-temp-background" class="tb-btn">Підсвітити фон на 30 с</button>
+              <button type="button" id="btn-temp-background" class="tb-btn">Підсвітити головну на 30 с</button>
             </div>
           </section>
 
           <section class="tb-card tb-card--course" aria-labelledby="tb-course-heading">
-            <h3 id="tb-course-heading">Демо для звіту (JavaScript)</h3>
-            <p class="tb-card__hint">Картка автора, маніпуляції DOM, <code>document.write</code> у новому вікні.</p>
+            <h3 id="tb-course-heading">Довідка та оновлення блоку</h3>
+            <p class="tb-card__hint">
+              Хто веде проєкт, швидкий перегляд збереженої чернетки в окремому вікні або скидання збережених рядків у браузері (нижче знову з’явиться приклад).
+            </p>
             <div class="tb-card__actions">
-              <button type="button" id="btn-author-card" class="tb-btn">Автор TaskBoard</button>
-              <button type="button" id="btn-dom-demo" class="tb-btn">Змінити чернетку (DOM)</button>
-              <button type="button" id="btn-document-write" class="tb-btn">Нове вікно (write)</button>
+              <button type="button" id="btn-author-card" class="tb-btn">Хто зробив TaskBoard</button>
+              <button type="button" id="btn-clear-home-draft" class="tb-btn">Скинути збережену чернетку</button>
+              <button type="button" id="btn-document-write" class="tb-btn">Відкрити швидкий перегляд</button>
             </div>
           </section>
 
-          <section class="tb-card tb-card--wide tb-card--sandbox" aria-labelledby="tb-sandbox-heading">
-            <h3 id="tb-sandbox-heading">Зона «чернетка» для DOM</h3>
-            <p id="author-snippet" data-role="автор">Рядок автора — його змінить демо DOM нижче.</p>
+          <section
+            id="tb-draft-card"
+            class="tb-card tb-card--wide tb-card--sandbox"
+            aria-labelledby="tb-sandbox-heading"
+          >
+            <h3 id="tb-sandbox-heading">Чернетка на головній</h3>
+            <p id="author-snippet" data-role="автор">
+              Рядок про автора — натисни «Швидкі три рядки в чернетку» вище, щоб зберегти рядки й час оновлення тут.
+            </p>
             <div id="dom-sandbox">
               <p class="sandbox-line">Завдання: перевірити список на tasks.html</p>
               <p class="sandbox-line">Проєкт: оформлення TaskBoard</p>
             </div>
+          </section>
+
+          <section class="tb-card tb-card--wide" aria-labelledby="tb-board-focus-heading">
+            <h3 id="tb-board-focus-heading">Мітки та команди дошки</h3>
+            <p class="tb-card__hint">
+              Обери рядок — підсвітка покаже пріоритет. Кнопки нижче ведуть до чернетки або знімають виділення.
+              Далі — як на справжній дошці: зона швидкого статусу реагує на курсор і клік, під нею панель оголошень оновлює журнал подій TaskBoard одним кліком.
+              Кнопка внизу вимикає запис у журнал від панелі оголошень.
+            </p>
+            <ul
+              id="tb-focus-list"
+              class="tb-focus-list"
+              onclick="window.taskboardListSelect && window.taskboardListSelect(event)"
+            >
+              <li class="tb-focus-list__item" data-behavior="pin">Сьогодні: лекція</li>
+              <li class="tb-focus-list__item" data-behavior="pin">На тиждень: практика</li>
+              <li class="tb-focus-list__item" data-behavior="pin">Пізніше: підготовка звіту</li>
+            </ul>
+            <nav id="tb-board-menu" class="tb-board-menu" aria-label="Команди дошки">
+              <button type="button" class="tb-btn tb-board-menu__btn" data-behavior="scrollDraft">Прокрутити до чернетки</button>
+              <button type="button" class="tb-btn tb-board-menu__btn" data-behavior="clearPins">Зняти вибір у списку</button>
+              <button type="button" class="tb-btn tb-board-menu__btn" data-behavior="emphasizeSandbox">Підкреслити блок чернетки</button>
+            </nav>
+            <div
+              id="tb-canvas-hit"
+              class="tb-canvas-hit"
+              tabindex="0"
+              onmouseenter="window.taskboardZoneEnterAttr && window.taskboardZoneEnterAttr(event)"
+            >
+              Зона швидкого статусу: наведи курсор або клікни — у журналі дошки з’явиться короткий запис.
+            </div>
+            <div id="tb-target-panel" class="tb-target-panel" role="status" tabindex="0" data-tb-role="Панель оголошень TaskBoard">
+              Панель оголошень — клік оновлює журнал подій TaskBoard під нею.
+            </div>
+            <p id="tb-event-log" class="tb-card__hint" aria-live="polite"></p>
+            <button type="button" id="tb-unbind-panel-trace" class="tb-btn">Не записувати кліки панелі оголошень у журнал</button>
           </section>
         </div>
       </section>
@@ -113,37 +159,26 @@
   <script>
     (function () {
       function bindNativeWindowsDemo() {
-        window.alert(
-          "TaskBoard — крок 1 з 3: alert.\n\n" +
-            "Далі з’явиться prompt: введіть ім’я або нік, яким ви підписуєтесь на дошці.\n" +
-            "Якщо у prompt натиснете «Скасувати», вікно підтвердження (confirm) не відкриється."
-        );
-        const name = window.prompt(
-          "TaskBoard — крок 2 з 3: prompt.\n\nЯк до вас звертатися на дошці (ім’я або нік)?",
-          ""
-        );
+        window.alert("Зараз можна задати підпис на дошці.");
+        const name = window.prompt("Як до тебе звертатися на дошці?", "");
         if (name === null) {
-          window.alert("TaskBoard: введення імені скасовано — поверніться до кнопки, коли будете готові.");
+          window.alert("Гаразд, залишаємо як було.");
           return;
         }
-        const accepted = window.confirm(
-          "TaskBoard — крок 3 з 3: confirm.\n\nПідпис на дошці: «" +
-            name +
-            "».\n\nOK — зберегти в localStorage і показати в блоці «Підпис на дошці» нижче.\nСкасувати — не зберігати."
-        );
+        const accepted = window.confirm("Зберегти підпис «" + name + "»?");
         if (!accepted) {
-          window.alert("TaskBoard: підпис не збережено (у confirm натиснуто Скасувати).");
+          window.alert("Не зберігаємо.");
           return;
         }
         const trimmed = name.trim();
         if (trimmed === "") {
-          window.alert("TaskBoard: підпис лише з пробілів — нічого не збережено, введіть букви або цифри.");
+          window.alert("Потрібні букви або цифри — лише пробіли не підходять.");
           return;
         }
         try {
           window.localStorage.setItem("taskboardDisplayName", trimmed);
         } catch (err) {
-          window.alert("TaskBoard: не вдалося записати в localStorage (наприклад, приватний режим).");
+          window.alert("Не вдалося зберегти — спробуй у звичайному вікні браузера.");
           return;
         }
         const slot = document.getElementById("board-display-name");
